@@ -1,0 +1,11 @@
+<div class="top">
+    <center>
+        <ul> <!--无序列表-->
+            <li><img src="sign.png" height="30px" /></li>
+            <li><a href="searchBook.html">查找图书</a></li>
+            <li><a href="lookProduct.jsp">我的书篮</a></li>
+            <li><a href="bbs.jsp">我的预约</a></li>
+            <li><a href="exitServlet.jsp">我的捐书</a></li>
+        </ul>
+    </center>
+</div>

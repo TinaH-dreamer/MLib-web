@@ -1,0 +1,30 @@
+.editText {
+	background: #EDEDEF;
+    border: 1px solid #9CA8B8;
+    color: #7A7281;
+	cursor: text;
+	font-family: "arial";
+	font-size: 9pt;
+	height: 20px;
+	padding: 1px;
+	outline-color: #8696A7;
+}
+table.me {
+	width: 400px;
+	margin: -15px auto;
+	border-top: 1px solid #DFD7D7;
+	border-spacing: 0px;
+	color: #7A7281;
+}
+table.me thead tr td,table.me tbody tr td {
+	white-space: nowrap;
+	border-bottom: 1px dashed #DFD7D7;
+	padding: 10px 20px;
+	text-align: center;
+	text-transform: uppercase;
+}
+table.me thead tr td {
+	border-bottom: 1px solid #DFD7D7;
+	font-size: 20px;
+	font-weight: bold;
+}
