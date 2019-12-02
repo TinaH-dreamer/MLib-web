@@ -10,7 +10,7 @@
 </head>
 <body>
     <div class="header">
-    	<p><a><img src="sign.png" height="45px"></a></p>
+    	<p><a><img src="img/sign.png" height="45px"></a></p>
     </div>
     <div class="menu">
         <ul>
