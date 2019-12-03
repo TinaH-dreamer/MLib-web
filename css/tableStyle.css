@@ -1,0 +1,115 @@
+.box {
+	padding: 0px;
+	margin: 0px;
+	font-family: 微软雅黑;
+	margin: -20px auto;		/*距离顶部的长度*/
+	width: 1200px;			/*距离右端的长度*/
+}
+.box_p {
+	width: 400px;
+	position: relative;
+	left: 50%;
+	margin-left: -200px; 
+}
+.box_p p {
+	text-align: center;
+	padding: 10px 0px 0px 0px;
+	font-size: 25px;
+	font-weight: bold;
+	text-transform: uppercase;
+	color: #7A7281;
+}
+table.mt {
+	width: 1150px;
+	margin: 10px auto;
+	border-top: 1px solid #DFD7D7;
+	border-spacing: 0px;
+	color: #7A7281;
+}
+table.mt thead tr td,table.mt tbody tr td {
+	border-bottom: 1px solid #DFD7D7;
+	padding: 10px 20px;
+	text-align: center;
+}
+table.mt thead tr td {
+	font-weight: bold;
+	text-transform: uppercase;
+}
+table.mt tbody tr:nth-child(even) {			/* 偶数行even，奇数行odd */
+	background: #DFD7D7;
+}
+.edit-button { 					/* 按钮美化 */
+	width: 45px; 				/* 宽度 */
+	height: 30px; 				/* 高度 */
+	border-width: 0px; 			/* 边框宽度 */
+	border-radius: 3px; 		/* 边框半径 */
+	background: #90003e; 		/* 背景颜色 */
+	cursor: pointer; 			/* 鼠标移入按钮范围时出现手势 */
+	outline: none; 				/* 不显示轮廓线 */
+	font-family: 微软雅黑; 		/* 设置字体 */
+	color: white; 				/* 字体颜色 */
+	font-size: 13px; 			/* 字体大小 */
+}
+.edit-button:hover { 			/* 鼠标移入按钮范围时改变颜色 */
+	background: #A27E7E;
+}
+.delete-button {
+	width: 45px;
+	height: 30px;
+	border-width: 0px;
+	border-radius: 3px;
+	background: #656565;
+	cursor: pointer;
+	outline: none;
+	font-family: 微软雅黑;
+	color: white;
+	font-size: 13px;
+}
+.delete-button:hover {
+	background: #8696A7;
+}
+.addData-button {
+	width: 80px;
+	height: 30px;
+	border-width: 0px;
+	border-radius: 3px;
+	background: #90003e;
+	cursor: pointer;
+	outline: none;
+	font-family: 微软雅黑;
+	color: white;
+	font-size: 13px;
+}
+.addData-button:hover {
+	background: #A27E7E;
+}
+.deleteTable-button {
+	width: 80px;
+	height: 30px;
+	border-width: 0px;
+	border-radius: 3px;
+	background: #656565;
+	cursor: pointer;
+	outline: none;
+	font-family: 微软雅黑;
+	color: white;
+	font-size: 13px;
+}
+.deleteTable-button:hover {
+	background: #8696A7;
+}
+.add-button { 					/* 按钮美化 */
+	width: 30px; 				/* 宽度 */
+	height: 30px; 				/* 高度 */
+	border-width: 0px; 			/* 边框宽度 */
+	border-radius: 10px; 		/* 边框半径 */
+	background: #90003e; 		/* 背景颜色 */
+	cursor: pointer; 			/* 鼠标移入按钮范围时出现手势 */
+	outline: none; 				/* 不显示轮廓线 */
+	font-family: 微软雅黑; 		/* 设置字体 */
+	color: white; 				/* 字体颜色 */
+	font-size: 20px; 			/* 字体大小 */
+}
+.add-button:hover { 			/* 鼠标移入按钮范围时改变颜色 */
+	background: #A27E7E;
+}

@@ -1,0 +1,8 @@
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link type="text/css" rel="stylesheet" href="css/navigationStyle.css">
+    <link rel="stylesheet" type="text/css" href="css/font.css">
+    <link rel="stylesheet" type="text/css" href="css/tableStyle.css">
+    <link rel="stylesheet" type="text/css" href="css/editTextStyle.css">
+    <link rel="stylesheet" type="text/css" href="css/panel.css">
+</head>
