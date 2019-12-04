@@ -6,8 +6,12 @@
 	font-family: "arial";
 	font-size: 9pt;
 	height: 20px;
+	width: 150px;
 	padding: 1px;
 	outline-color: #8696A7;
+}
+input[type="date"]::-webkit-clear-button{		/*消除叉叉*/
+   display:none;
 }
 table.me {
 	width: 400px;
