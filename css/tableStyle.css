@@ -83,6 +83,18 @@ table.mt tbody tr:nth-child(even) {			/* 偶数行even，奇数行odd */
 .addData-button:hover {
 	background: #A27E7E;
 }
+.active-button {
+	width: 80px;
+	height: 30px;
+	border-width: 0px;
+	border-radius: 3px;
+	background: #656565;
+	cursor: pointer;
+	outline: none;
+	font-family: 微软雅黑;
+	color: white;
+	font-size: 13px;
+}
 .deleteTable-button {
 	width: 80px;
 	height: 30px;
