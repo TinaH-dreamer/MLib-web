@@ -4,8 +4,9 @@
 	session_start();
 
     include ("conn.php");
-    mysqli_query($conn,"set names utf-8");
+    mysqli_query($conn,"set names utf8");
 
+	/*
     $index = 0;					//计数当前表属性数量
     $tablename = "student";
     $query = "desc ".$tablename;	//获取当前表的属性
@@ -16,7 +17,8 @@
             $priNum = $index;
         }
         $index++;
-    }
+	}
+	*/
 
 	// 处理用户登录信息
 	if (isset($_POST['login'])) {
@@ -32,8 +34,8 @@
 		}
 
 		else{
-		    $sql = 'SELECT * FROM STUDENT WHERE SID = '.$username.' AND Spass = '.$password;
-		    $result = $conn->query($sql);
+		    $sql = "select * from STUDENT where SID='".$username."' and SPass='".$password."'";
+			$result = mysqli_query($conn, $sql);
 		    if($result->num_rows>0){
 		        # 用户名和密码都正确,将用户信息存到Session中
                 $_SESSION['username'] = $username;
@@ -53,7 +55,8 @@
 		    else{
                 //用户名或密码错误,同空的处理方式
 			    header('refresh:3; url=login.html');
-			    echo "用户名或密码错误!";
+				echo "用户名或密码错误!";
+				//echo $sql;
 			    exit;
 		    }
 
