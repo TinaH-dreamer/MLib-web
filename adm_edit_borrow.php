@@ -43,52 +43,55 @@ require "head.txt";
 			echo "<form action='adm_finish.php?act=edit&id=".$id."#pos' method='post'>";
 		?>
 	    <table class="me">
+	    	<thead>
+				<tr>
+					<td>编号</td>
+					<td>学号</td>
+					<td>姓名</td>
+					<td>书名</td>
+					<td>书号</td>
+					<td>借阅日期</td>
+					<td>还书日期</td>
+					</tr>
+			</thead>
 			<tbody>	
 				<?php
-					$query1 = "desc ".$tablename;
-					$res1 = mysqli_query($conn, $query1) or die(mysqli_error($conn));
 					$query2 = "select * from ".$tablename." where ".$pri."='".$id."';";		//获取当前主码值对应的属性值
 					$res2 = mysqli_query($conn, $query2) or die(mysqli_error($conn));
 					$dbrow2 = mysqli_fetch_array($res2);
-					for($i = 0; $i < 6; $i++) {
-						$dbrow1 = mysqli_fetch_array($res1);
-						echo "<tr>";
-						echo "<td></td>";
-						switch ($i) {
-							case '0': echo "<td>编号</td>"; break;
-							case '1': 
-								echo "<td>姓名</td>";
-				                $sql = "select SName from student WHERE SID = ".$dbrow2[1];
-				                $res3 = mysqli_query($conn, $sql) or die(mysqli_error($conn));
-				                $row3 = mysqli_fetch_row($res3);
-				                echo "<td>".$row3[0]."</td>";
-								echo "<td></td>";
-								echo "</tr>";
-								echo "<tr>";
-								echo "<td></td>";
-								echo "<td>学号</td>";
-								break;
-							case '2': echo "<td>书号</td>"; break;
-							case '3': echo "<td>书名</td>"; break;
-							case '4': echo "<td>借书日期</td>"; break;
-							case '5': echo "<td>还书日期</td>"; break;
-						}
-						if($i == 3){
-							$sql = "select BName from books WHERE BID = ".$dbrow2[2];
+					$bookid = explode(',',$dbrow2[2]);
+                    $count = count($bookid);
+					for($i = 0; $i < $count; $i++) {
+						if($i == 0){
+							echo "<tr>";
+							echo "<td>".$dbrow2[0]."</td>";
+							echo "<td><input type='text' class='editText' name='studentid' value='".$dbrow2[1]."'></td>";
+			                $sql = "select SName from student WHERE SID = ".$dbrow2[1];
 				            $res3 = mysqli_query($conn, $sql) or die(mysqli_error($conn));
 				            $row3 = mysqli_fetch_row($res3);
 				            echo "<td>".$row3[0]."</td>";
-							echo "<td></td>";
-							echo "</tr>";
-						}
-						else if($i == 4 || $i == 5) {
-							$arr = explode(' ',$dbrow2[$i]);
-							echo "<td><input type='date' class='editText' name='".$dbrow1[0]."' value='".$arr[0]."'></td>";
-							echo "<td></td>";
+							$sql = "select BName from books WHERE BID = ".$bookid[$i];
+				            $res3 = mysqli_query($conn, $sql) or die(mysqli_error($conn));
+				            $row3 = mysqli_fetch_row($res3);
+				            echo "<td>".$row3[0]."</td>";
+				            echo "<td><input type='text' class='editText' name='bookid".$i."' value='".$bookid[$i]."'></td>";
+				            $arr = explode(' ',$dbrow2[4]);
+							echo "<td><input type='date' class='editText' name='borrowdate' value='".$arr[0]."'></td>";
+							$arr = explode(' ',$dbrow2[5]);
+							echo "<td><input type='date' class='editText' name='returndate' value='".$arr[0]."'></td>";
 							echo "</tr>";
 						}
 						else{
-							echo "<td><input type='text' class='editText' name='".$dbrow1[0]."' value='".$dbrow2[$i]."'></td>";
+							echo "<tr>";
+							echo "<td></td>";
+							echo "<td></td>";
+							echo "<td></td>";
+							$sql = "select BName from books WHERE BID = ".$bookid[$i];
+				            $res3 = mysqli_query($conn, $sql) or die(mysqli_error($conn));
+				            $row3 = mysqli_fetch_row($res3);
+				            echo "<td>".$row3[0]."</td>";
+							echo "<td><input type='text' class='editText' name='bookid".$i."' value='".$bookid[$i]."'></td>";
+							echo "<td></td>";
 							echo "<td></td>";
 							echo "</tr>";
 						}

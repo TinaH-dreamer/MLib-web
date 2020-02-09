@@ -46,55 +46,48 @@ require "head.txt";
             echo "<form action='adm_borrow.php?act=confirm"."&id=".$id."#pos' method='post'>";
         ?>
         <table class="me">
+        	<thead>
+				<tr>
+					<td>编号</td>
+					<td>姓名</td>
+					<td>学号</td>
+					<td>书名</td>
+					<td>书号</td>
+					<td>借阅日期</td>
+					</tr>
+			</thead>
             <tbody> 
                 <?php
                     $query = "select * from ".$tablename." where ".$pri."='".$id."';";     //获取当前主码值对应的属性值
                     $res = mysqli_query($conn, $query) or die(mysqli_error($conn));
                     $dbrow = mysqli_fetch_array($res);
-                    echo "<tr>";
-                    echo "<td></td>";
-                    echo "<td>编号</td>";
-                    echo "<td>".$dbrow[0]."</td>";
-                    echo "<td></td>";
-                    echo "</tr>";
-
-                    echo "<tr>";
-                    echo "<td></td>";
-                    echo "<td>姓名</td>";
-                    $sql = "select SName from student WHERE SID = ".$dbrow[1];
-                    $res1 = mysqli_query($conn, $sql) or die(mysqli_error($conn));
-                    $row1 = mysqli_fetch_row($res1);
-                    echo "<td>".$row1[0]."</td>";
-                    echo "<td></td>";
-                    echo "</tr>";
-                
-                    echo "<tr>";
-                    echo "<td></td>";
-                    echo "<td>学号</td>";
-                    echo "<td>".$dbrow[1]."</td>";
-                    echo "<td></td>";
-                    echo "</tr>";
-
-                    echo "<tr>";
-                    echo "<td></td>";
-                    echo "<td>书号</td>";
-                    echo "<td><input type='text' class='editText' name='bookid'></td>";
-                    echo "<td></td>";
-                    echo "</tr>";
-
-                    echo "<tr>";
-                    echo "<td></td>";
-                    echo "<td>书名</td>";
-                    echo "<td>".$dbrow[3]."</td>";
-                    echo "<td></td>";
-                    echo "</tr>";
-
-                    echo "<tr>";
-                    echo "<td></td>";
-                    echo "<td>借阅日期</td>";
-                    echo "<td><input type='date' class='editText' name='borrowdate' value='".date("Y-m-d")."'></td>";
-                    echo "<td></td>";
-                    echo "</tr>";
+                    $bookname = explode(',',$dbrow[3]);
+                    $count = count($bookname);
+					for($i = 0; $i < $count; $i++){
+						if($i == 0){
+		                    echo "<tr>";
+		                    echo "<td>".$dbrow[0]."</td>";		//编号
+		                    $sql = "select SName from student WHERE SID = ".$dbrow[1];
+		                    $res1 = mysqli_query($conn, $sql) or die(mysqli_error($conn));
+		                    $row1 = mysqli_fetch_row($res1);
+		                    echo "<td>".$row1[0]."</td>";		//姓名
+		                    echo "<td>".$dbrow[1]."</td>";		//学号
+		                    echo "<td>".$bookname[$i]."</td>";		//书名
+		                    echo "<td><input type='text' class='editText' name='bookid".$i."'></td>";		//书号
+		                    echo "<td><input type='date' class='editText' name='borrowdate' value='".date("Y-m-d")."'></td>";		//借阅日期
+		                    echo "</tr>";							
+						}
+						else{
+							echo "<tr>";
+							echo "<td></td>";
+							echo "<td></td>";
+							echo "<td></td>";
+							echo "<td>".$bookname[$i]."</td>";		//书名
+		                    echo "<td><input type='text' class='editText' name='bookid".$i."'></td>";		//书号
+							echo "<td></td>";
+							echo "</tr>";
+						}
+                	}
                 ?>
             </tbody>
         </table>

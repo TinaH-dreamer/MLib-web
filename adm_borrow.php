@@ -10,10 +10,10 @@ require "head.txt";
     </div>
     <div class="menu">
         <ul>
-            <li><a href="admdonate.php">捐书管理</a></li>
+            <li><a href="adm_donate.php">捐书管理</a></li>
         	<li><a href="adm_borrow.php">借阅管理</a></li>
-        	<li><a href="admbooks.php">库存管理</a></li>
-        	<li><a href="admusers.php">用户管理</a></li>
+        	<li><a href="adm_books.php">库存管理</a></li>
+        	<li><a href="adm_users.php">用户管理</a></li>
         </ul>
     </div>
     <?php
@@ -40,7 +40,16 @@ require "head.txt";
 				$action = $_GET['act'];
 			if($action == 'confirm') {			//编辑数据操作
 				$id = $_GET['id'];			//获取要编辑数据的主码
-				$sql = "update ".$tablename." set BID='".$_POST['bookid']."', Borrow_Date='".$_POST['borrowdate']."', type='1'";
+				$query = "select * from ".$tablename." where ".$pri."='".$id."';";     //获取当前主码值对应的属性值
+                $res = mysqli_query($conn, $query) or die(mysqli_error($conn));
+                $dbrow = mysqli_fetch_array($res);
+                $bookname = explode(',',$dbrow[3]);
+                $count = count($bookname);
+				$sql = "update ".$tablename." set BID='";
+				for($i = 0; $i < $count; $i++)
+					$sql = $sql.$_POST['bookid'.$i].",";
+				$sql = rtrim($sql,",");
+				$sql = $sql."', Borrow_Date='".$_POST['borrowdate']."', type='1'";
 				$sql = $sql ." where ".$pri."='".$id."';";
 				$res = mysqli_query($conn, $sql) or die(mysqli_error($conn)); //数据库执行编辑数据操作
 			}
@@ -92,7 +101,11 @@ require "head.txt";
 							$row1 = mysqli_fetch_row($res1);
 							echo "<td>".$row1[0]."</td>";	//姓名
 							echo "<td>".$row[1]."</td>";	//学号
-							echo "<td>".$row[3]."</td>";	//书名
+							if(mb_strlen($row[3])>10)
+								$newStr = mb_substr($row[3],0,10,"UTF8")."...";
+							else
+								$newStr = $row[3];
+							echo "<td>".$newStr."</td>";	//书名
 							echo "<td>".$row[4]."</td>";	//取书时间
 							echo "<td><a href='adm_confirm_book.php?id=".$row[$priNum]."#pos'><button class='addData-button'>确认取书</button></a></td>";
 							echo "</tr>";

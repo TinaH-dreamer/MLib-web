@@ -3,10 +3,10 @@
     </div>
     <div class="menu">
         <ul>
-            <li><a href="admdonate.php">捐书管理</a></li>
-        	<li><a href="admborrow.php">借阅管理</a></li>
-        	<li><a href="admbooks.php">库存管理</a></li>
-        	<li><a href="admusers.php">用户管理</a></li>
+            <li><a href="adm_donate.php">捐书管理</a></li>
+        	<li><a href="adm_borrow.php">借阅管理</a></li>
+        	<li><a href="adm_books.php">库存管理</a></li>
+        	<li><a href="adm_users.php">用户管理</a></li>
         </ul>
     </div>
     <?php

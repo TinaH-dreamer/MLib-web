@@ -68,8 +68,8 @@ require "head.txt";
 					<td>编号</td>
 					<td>姓名</td>
 					<td>学号</td>
-					<td>书号</td>
 					<td>书名</td>
+					<td>书号</td>
 					<td>借书日期</td>
 					<td></td>
 					</tr>
@@ -93,8 +93,16 @@ require "head.txt";
 							$row1 = mysqli_fetch_row($res1);
 							echo "<td>".$row1[0]."</td>";	//姓名
 							echo "<td>".$row[1]."</td>";	//学号
-							echo "<td>".$row[2]."</td>";	//书号
-							echo "<td>".$row[3]."</td>";	//书名
+							if(mb_strlen($row[3])>10)
+								$newStr = mb_substr($row[3],0,10,"UTF8")."...";
+							else
+								$newStr = $row[3];
+							echo "<td>".$newStr."</td>";	//书名
+							if(mb_strlen($row[2])>8)
+								$newStr1 = mb_substr($row[2],0,8,"UTF8")."...";
+							else
+								$newStr1 = $row[2];
+							echo "<td>".$newStr1."</td>";	//书号
 							$arr = explode(' ',$row[4]);
 							echo "<td>".$arr[0]."</td>";	//取书日期
 							echo "<td><a href='adm_return_book.php?id=".$row[$priNum]."#pos'><button class='addData-button'>归还</button></a></td>";

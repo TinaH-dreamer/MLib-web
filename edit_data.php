@@ -33,7 +33,7 @@ require "header.php";
 						case '4': echo "<td>库存</td>"; break;
 					}
 					//value让文本框有默认数据，即原本属性值
-					echo "<td><input type='text' class='editText' size='30' name='".$dbrow1[0]."' value='".$dbrow2[$i]."'></td>";
+					echo "<td><input type='text' class='editText' name='".$dbrow1[0]."' value='".$dbrow2[$i]."'></td>";
 					echo "<td></td>";
 					echo "</tr>";
 				}

@@ -44,22 +44,24 @@ require "head.txt";
 			}
 			if($action == 'edit') {
 				$id = $_GET['id'];			//获取要编辑数据的主码
-				$sql = "update ".$tablename." set ";
-				$res = mysqli_query($conn, $query) or die(mysqli_error($conn));
-				for($i = 0; $i < 6; $i++) {
-					$row = mysqli_fetch_array($res);
-					if($i == 2)
-						$bid = $_POST[$row[0]];
-					if($i != 3)
-						$sql = $sql.$row[0]."='".$_POST[$row[0]]."',";
-					else {
-						$sql1 = "select BName from books WHERE BID = ".$bid;
-				        $res1 = mysqli_query($conn, $sql1) or die(mysqli_error($conn));
-				        $row1 = mysqli_fetch_row($res1);
-						$sql = $sql.$row[0]."='".$row1[0]."',";
-					}
+				$query = "select * from ".$tablename." where ".$pri."='".$id."';";     //获取当前主码值对应的属性值
+                $res = mysqli_query($conn, $query) or die(mysqli_error($conn));
+                $dbrow = mysqli_fetch_array($res);
+                $bookid = explode(',',$dbrow[2]);
+                $count = count($bookid);
+				$sql = "update ".$tablename." set SID='".$_POST['studentid'].", BID='";
+				for($i = 0; $i < $count; $i++)
+					$sql = $sql.$_POST['bookid'.$i].",";
+				$sql = rtrim($sql,",");
+				$sql = $sql."', BName='";
+				for($i = 0; $i < $count; $i++){
+					$sql1 = "select SName from student WHERE SID = ".$_POST['bookid'.$i];
+				    $res3 = mysqli_query($conn, $sql1) or die(mysqli_error($conn));
+				    $row3 = mysqli_fetch_row($res3);
+				    $sql = $sql.$row3[0].",";
 				}
 				$sql = rtrim($sql,",");
+				$sql = $sql."', Borrow_Date='".$_POST['borrowdate']."', Return_Date='".$_POST['returndate']."'";
 				$sql = $sql ." where ".$pri."='".$id."';";
 				$res = mysqli_query($conn, $sql) or die(mysqli_error($conn)); //数据库执行编辑数据操作
 			}
@@ -87,8 +89,8 @@ require "head.txt";
 					<td>编号</td>
 					<td>姓名</td>
 					<td>学号</td>
-					<td>书号</td>
 					<td>书名</td>
+					<td>书号</td>
 					<td>借书日期</td>
 					<td>还书日期</td>
 					<td></td>
@@ -113,8 +115,16 @@ require "head.txt";
 							$row1 = mysqli_fetch_row($res1);
 							echo "<td>".$row1[0]."</td>";	//姓名
 							echo "<td>".$row[1]."</td>";	//学号
-							echo "<td>".$row[2]."</td>";	//书号
-							echo "<td>".$row[3]."</td>";	//书名
+							if(mb_strlen($row[3])>10)
+								$newStr = mb_substr($row[3],0,10,"UTF8")."...";
+							else
+								$newStr = $row[3];
+							echo "<td>".$newStr."</td>";	//书名
+							if(mb_strlen($row[2])>8)
+								$newStr1 = mb_substr($row[2],0,8,"UTF8")."...";
+							else
+								$newStr1 = $row[2];
+							echo "<td>".$newStr1."</td>";	//书号
 							$arr = explode(' ',$row[4]);
 							echo "<td>".$arr[0]."</td>";	//取书日期
 							$arr = explode(' ',$row[5]);
