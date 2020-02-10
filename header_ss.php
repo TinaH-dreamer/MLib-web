@@ -1,14 +1,36 @@
+<!--
 <div class="header">
     <p><a><img src="img/sign.png" height="45px"></a></p>
 </div>
-<div class="menu">
-    <ul>
-        <li><a href = "mydonate.php">捐书</a></li>
-        <li><a href = "myborrow.php">我的借阅</a></li>
-        <li><a href = "mycart.php">我的书篮</a></li>
-        <li><a href = "viewbooks.php">查询图书</a></li>
+-->
+<div style="margin-top:2.4rem;margin-bottom:1rem;margin-left:0.4rem;margin-right:0.6rem">
+    <ul class="nav nav-tabs">
+        <li class="disabled"><img src="img/sign.png" height="45px"></li>
+    <ul class="nav nav-tabs navbar-right">
+        <li class="active">
+            <a href="viewbooks.php">查询图书</a>
+        </li>
+        <li>
+            <a href="myborrow.php">我的借阅</a>
+        </li>
+        <li>
+            <a href="mydonate.php">捐书</a>
+        </li>
+        <li>
+            <a href="logout.php">退出登录</a>
+        </li>
     </ul>
 </div>
+<!--
+<div class="menu">
+    <ul>
+        <li><a href="logout.php" id="logout.php">退出登录</a></li>
+        <li><a href="mydonate.php" id="mydonate.php">捐书</a></li>
+        <li><a href="myborrow.php" id="myborrow.php">我的借阅</a></li>
+        <li><a href="viewbooks.php" id="viewbooks.php">查询图书</a></li>
+    </ul>
+</div>
+-->
 <?php
     include ("conn.php");
     mysqli_query($conn,"set names utf-8");
@@ -25,3 +47,7 @@
         $index++;
     }
 ?>
+<script type="text/javascript">
+    var loc = window.location.pathname;
+    document.getElementById(loc).classList.add('active');
+</script>

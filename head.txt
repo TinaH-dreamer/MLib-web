@@ -1,8 +1,31 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <link type="text/css" rel="stylesheet" href="css/navigationStyle.css">
-    <link rel="stylesheet" type="text/css" href="css/font.css">
+    <!--Bootstrap_css-->
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <!--font-awesome图标-->
+    <link href="css/font-awesome.css" rel="stylesheet">
+    <link href="css/font-awesome.min.css" rel="stylesheet">
+    <link rel="icon" type="image/png" href="img/favicon.png">
+    <!--<link type="text/css" rel="stylesheet" href="css/navigationStyle.css">-->
     <link rel="stylesheet" type="text/css" href="css/tableStyle.css">
     <link rel="stylesheet" type="text/css" href="css/editTextStyle.css">
     <link rel="stylesheet" type="text/css" href="css/panel.css">
+    <link href="css/.css" rel="stylesheet" type="text/css">
+    <!--Bootstrap_js-->
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js" />
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js" />
+    <script type="text/css">
+        body{
+            background-color: #90003E;
+            background-size: 100%;
+            height: 100%;
+        }
+        .nav>li>a:hover:not(.active){
+            background-color:#A00C48;
+        }
+        .nav>li>a{
+            color:white;
+        }
+    </script>
+
 </head>

@@ -1,0 +1,26 @@
+.container{
+    background:#ededef;
+    width:99%;
+    height:100%;
+    padding:6rem 8rem;
+}
+
+.btn-tran {
+    background: transparent;
+    border: none !important;
+    font-size:0;
+}
+
+.nav>li>a{
+    color:#ffffff;
+    font-size:12pt;
+    position:relative;
+}
+.nav>li>a:hover{
+    background:#A00C48;
+    border-color: #90003e;
+}
+
+.nav>li>a:active{
+    background:#ededef;
+}
