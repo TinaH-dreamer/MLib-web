@@ -9,10 +9,10 @@ require "head.txt";
     </div>
     <div class="menu">
         <ul>
-            <li><a href="admdonate.php">捐书管理</a></li>
+            <li><a href="adm_donate.php">捐书管理</a></li>
         	<li><a href="adm_borrow.php">借阅管理</a></li>
-        	<li><a href="admbooks.php">库存管理</a></li>
-        	<li><a href="admusers.php">用户管理</a></li>
+        	<li><a href="adm_books.php">库存管理</a></li>
+        	<li><a href="adm_users.php">用户管理</a></li>
         </ul>
     </div>
     <?php
@@ -49,13 +49,13 @@ require "head.txt";
                 $dbrow = mysqli_fetch_array($res);
                 $bookid = explode(',',$dbrow[2]);
                 $count = count($bookid);
-				$sql = "update ".$tablename." set SID='".$_POST['studentid'].", BID='";
+				$sql = "update ".$tablename." set SID='".$_POST['studentid']."', BID='";
 				for($i = 0; $i < $count; $i++)
 					$sql = $sql.$_POST['bookid'.$i].",";
 				$sql = rtrim($sql,",");
 				$sql = $sql."', BName='";
 				for($i = 0; $i < $count; $i++){
-					$sql1 = "select SName from student WHERE SID = ".$_POST['bookid'.$i];
+					$sql1 = "select BName from books WHERE BID = ".$_POST['bookid'.$i];
 				    $res3 = mysqli_query($conn, $sql1) or die(mysqli_error($conn));
 				    $row3 = mysqli_fetch_row($res3);
 				    $sql = $sql.$row3[0].",";

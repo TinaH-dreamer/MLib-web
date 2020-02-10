@@ -40,7 +40,7 @@ require "head.txt";
 				$action = $_GET['act'];
 			if($action == 'return') {			//编辑数据操作
 				$id = $_GET['id'];			//获取要编辑数据的主码
-				$sql = "update ".$tablename." set Return_Date='".$_POST['returndate']."', type='2'";	//2表示该预约记录已完成
+				$sql = "update ".$tablename." set Return_Date='".$_POST['returndate']."', State='2'";	//2表示该预约记录已完成
 				$sql = $sql ." where ".$pri."='".$id."';";
 				$res = mysqli_query($conn, $sql) or die(mysqli_error($conn)); //数据库执行编辑数据操作
 			}

@@ -49,7 +49,7 @@ require "head.txt";
 				for($i = 0; $i < $count; $i++)
 					$sql = $sql.$_POST['bookid'.$i].",";
 				$sql = rtrim($sql,",");
-				$sql = $sql."', Borrow_Date='".$_POST['borrowdate']."', type='1'";
+				$sql = $sql."', Borrow_Date='".$_POST['borrowdate']."', State='1'";
 				$sql = $sql ." where ".$pri."='".$id."';";
 				$res = mysqli_query($conn, $sql) or die(mysqli_error($conn)); //数据库执行编辑数据操作
 			}

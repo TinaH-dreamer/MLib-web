@@ -94,6 +94,7 @@ require "head.txt";
         <div class="box_p">
             <p>
                 <?php 
+                    echo "<a href='adm_borrow.php'><button type='button' class='deleteTable-button'>返回</button></a> ";
                     echo "<button type='submit' class='addData-button'>确认</button>";
                 ?>
             </p>
