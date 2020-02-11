@@ -5,4 +5,6 @@
     <link rel="stylesheet" type="text/css" href="css/tableStyle.css">
     <link rel="stylesheet" type="text/css" href="css/editTextStyle.css">
     <link rel="stylesheet" type="text/css" href="css/panel.css">
+    <link rel="stylesheet" type="text/css" href="css/component.css" />
+    <script src="js/modernizr.custom.js"></script>
 </head>

@@ -109,34 +109,65 @@ require "head.txt";
 						if($row[7] == 2)			//判断该记录是预约记录还是借阅记录，0表示预约记录，1表示借阅记录，2表示已完成记录
 						{
 							echo "<tr>";
-							echo "<td>".$row[0]."</td>";	//编号
+							echo "<td class='md-trigger' style='cursor:pointer' data-modal='modal-1'>".$row[0]."</td>";	//编号
 							$sql = "select SName from student WHERE SID = ".$row[1];		//通过对应的学号，查询student表获取学生的姓名
 							$res1 = mysqli_query($conn, $sql) or die(mysqli_error($conn));
 							$row1 = mysqli_fetch_row($res1);
-							echo "<td>".$row1[0]."</td>";	//姓名
-							echo "<td>".$row[1]."</td>";	//学号
+							echo "<td class='md-trigger' style='cursor:pointer' data-modal='modal-1'>".$row1[0]."</td>";	//姓名
+							echo "<td class='md-trigger' style='cursor:pointer' data-modal='modal-1'>".$row[1]."</td>";	//学号
 							if(mb_strlen($row[3])>10)
 								$newStr = mb_substr($row[3],0,10,"UTF8")."...";
 							else
 								$newStr = $row[3];
-							echo "<td>".$newStr."</td>";	//书名
+							echo "<td class='md-trigger' style='cursor:pointer' data-modal='modal-1'>".$newStr."</td>";	//书名
 							if(mb_strlen($row[2])>8)
 								$newStr1 = mb_substr($row[2],0,8,"UTF8")."...";
 							else
 								$newStr1 = $row[2];
-							echo "<td>".$newStr1."</td>";	//书号
-							$arr = explode(' ',$row[4]);
-							echo "<td>".$arr[0]."</td>";	//取书日期
-							$arr = explode(' ',$row[5]);
-							echo "<td>".$arr[0]."</td>";	//还书日期
+							echo "<td class='md-trigger' style='cursor:pointer' data-modal='modal-1'>".$newStr1."</td>";	//书号
+							$arr1 = explode(' ',$row[4]);
+							echo "<td class='md-trigger' style='cursor:pointer' data-modal='modal-1'>".$arr1[0]."</td>";	//取书日期
+							$arr2 = explode(' ',$row[5]);
+							echo "<td class='md-trigger' style='cursor:pointer' data-modal='modal-1'>".$arr2[0]."</td>";	//还书日期
 							echo "<td><a href='adm_edit_borrow.php?id=".$row[$priNum]."'><button class='edit-button'>编辑</button></a> ";
 							echo "<a href='adm_finish.php?act=delete&id=".$row[$priNum]."'><button class='delete-button'>删除</button></a></td>";
 							echo "</tr>";
+							echo "<div class='md-modal md-effect-1' id='modal-1'>
+									<div class='md-content'>
+										<h3>记录详情</h3>
+										<div>
+											<ul>
+												<li><strong>编号：</strong>".$row[0]."</li>
+												<li><strong>姓名：</strong>".$row1[0]."</li>
+												<li><strong>学号：</strong>".$row[1]."</li><li><strong>书籍：</strong>";
+											$bookname = explode(',',$row[3]);
+											$bookid = explode(',', $row[2]);
+						                    $count = count($bookname);
+											for($i = 0; $i < $count; $i++){
+												echo $bookid[$i].".".$bookname[$i];
+												if($i != $count-1)
+													echo "<br>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp";
+											}
+											echo "<li><strong>借阅日期：</strong>".$arr1[0]."</li>
+												<li><strong>还书日期：</strong>".$arr2[0]."</li>
+											</ul>
+											<button class='md-close close-button'>关闭</button>
+										</div>
+									</div>
+								</div>";
 						}
 					}
 				?>
 			</tbody>
 		</table>
+		<div class="md-overlay"></div>
+ 		<script src="js/classie.js"></script>
+		<script src="js/modalEffects.js"></script>
+		<script>
+			var polyfilter_scriptpath = '/js/';
+		</script>
+		<script src="js/cssParser.js"></script>
+		<script src="js/css-filters-polyfill.js"></script>
 	</div>
 </div>
 </body>

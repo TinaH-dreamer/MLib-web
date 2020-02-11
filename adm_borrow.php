@@ -95,25 +95,54 @@ require "head.txt";
 						if($row[7] == 0)			//判断该记录是预约记录还是借阅记录，0表示预约记录，1表示借阅记录
 						{
 							echo "<tr>";
-							echo "<td>".$row[0]."</td>";	//预约号
+							echo "<td class='md-trigger' style='cursor:pointer' data-modal='modal-1'>".$row[0]."</td>";	//预约号
 							$sql = "select SName from student WHERE SID = ".$row[1];		//通过对应的学号，查询student表获取学生的姓名
 							$res1 = mysqli_query($conn, $sql) or die(mysqli_error($conn));
 							$row1 = mysqli_fetch_row($res1);
-							echo "<td>".$row1[0]."</td>";	//姓名
-							echo "<td>".$row[1]."</td>";	//学号
+							echo "<td class='md-trigger' style='cursor:pointer' data-modal='modal-1'>".$row1[0]."</td>";	//姓名
+							echo "<td class='md-trigger' style='cursor:pointer' data-modal='modal-1'>".$row[1]."</td>";	//学号
 							if(mb_strlen($row[3])>10)
 								$newStr = mb_substr($row[3],0,10,"UTF8")."...";
 							else
 								$newStr = $row[3];
-							echo "<td>".$newStr."</td>";	//书名
-							echo "<td>".$row[4]."</td>";	//取书时间
+							echo "<td class='md-trigger' style='cursor:pointer' data-modal='modal-1'>".$newStr."</td>";	//书名
+							echo "<td class='md-trigger' style='cursor:pointer' data-modal='modal-1'>".$row[4]."</td>";	//取书时间
 							echo "<td><a href='adm_confirm_book.php?id=".$row[$priNum]."#pos'><button class='addData-button'>确认取书</button></a></td>";
 							echo "</tr>";
+							echo "<div class='md-modal md-effect-1' id='modal-1'>
+									<div class='md-content'>
+										<h3>预约详情</h3>
+										<div>
+											<ul>
+												<li><strong>编号：</strong>".$row[0]."</li>
+												<li><strong>姓名：</strong>".$row1[0]."</li>
+												<li><strong>学号：</strong>".$row[1]."</li><li><strong>书籍：</strong>";
+											$bookname = explode(',',$row[3]);
+						                    $count = count($bookname);
+											for($i = 0; $i < $count; $i++){
+												echo $bookname[$i];
+												if($i != $count-1)
+													echo "<br>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp";
+											}
+											echo "<li><strong>取书时间：</strong>".$row[4]."</li>
+											</ul>
+											<button class='md-close close-button'>关闭</button>
+										</div>
+									</div>
+								</div>";
 						}
 					}
 				?>
 			</tbody>
 		</table>
+		<div class="md-overlay"></div>
+ 		<script src="js/classie.js"></script>
+		<script src="js/modalEffects.js"></script>
+		<script>
+			var polyfilter_scriptpath = '/js/';
+		</script>
+		<script src="js/cssParser.js"></script>
+		<script src="js/css-filters-polyfill.js"></script>
 	</div>
 </div>
 </body>
