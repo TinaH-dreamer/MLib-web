@@ -7,8 +7,8 @@
     <ul class="nav nav-tabs">
         <li class="disabled"><img src="img/sign.png" height="45px"></li>
     <ul class="nav nav-tabs navbar-right">
-        <li class="active">
-            <a href="viewbooks.php">查询图书</a>
+        <li>
+            <a href="viewbooks.php" class="active">查询图书</a>
         </li>
         <li>
             <a href="myborrow.php">我的借阅</a>
