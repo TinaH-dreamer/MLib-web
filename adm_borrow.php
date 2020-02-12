@@ -91,25 +91,26 @@ require "head.txt";
 						$query = "select * from ".$tablename;	//获取当前表所有数据
 					}
 					$res = mysqli_query($conn, $query) or die(mysqli_error($conn));
+					$index = 0;
 					while($row = mysqli_fetch_row($res)){
 						if($row[7] == 0)			//判断该记录是预约记录还是借阅记录，0表示预约记录，1表示借阅记录
 						{
 							echo "<tr>";
-							echo "<td class='md-trigger' style='cursor:pointer' data-modal='modal-1'>".$row[0]."</td>";	//预约号
+							echo "<td class='md-trigger' style='cursor:pointer' data-modal='modal-".$index."'>".$row[0]."</td>";	//预约号
 							$sql = "select SName from student WHERE SID = ".$row[1];		//通过对应的学号，查询student表获取学生的姓名
 							$res1 = mysqli_query($conn, $sql) or die(mysqli_error($conn));
 							$row1 = mysqli_fetch_row($res1);
-							echo "<td class='md-trigger' style='cursor:pointer' data-modal='modal-1'>".$row1[0]."</td>";	//姓名
-							echo "<td class='md-trigger' style='cursor:pointer' data-modal='modal-1'>".$row[1]."</td>";	//学号
+							echo "<td class='md-trigger' style='cursor:pointer' data-modal='modal-".$index."'>".$row1[0]."</td>";	//姓名
+							echo "<td class='md-trigger' style='cursor:pointer' data-modal='modal-".$index."'>".$row[1]."</td>";	//学号
 							if(mb_strlen($row[3])>10)
 								$newStr = mb_substr($row[3],0,10,"UTF8")."...";
 							else
 								$newStr = $row[3];
-							echo "<td class='md-trigger' style='cursor:pointer' data-modal='modal-1'>".$newStr."</td>";	//书名
-							echo "<td class='md-trigger' style='cursor:pointer' data-modal='modal-1'>".$row[4]."</td>";	//取书时间
+							echo "<td class='md-trigger' style='cursor:pointer' data-modal='modal-".$index."'>".$newStr."</td>";	//书名
+							echo "<td class='md-trigger' style='cursor:pointer' data-modal='modal-".$index."'>".$row[4]."</td>";	//取书时间
 							echo "<td><a href='adm_confirm_book.php?id=".$row[$priNum]."#pos'><button class='addData-button'>确认取书</button></a></td>";
 							echo "</tr>";
-							echo "<div class='md-modal md-effect-1' id='modal-1'>
+							echo "<div class='md-modal md-effect-1' id='modal-".$index."'>
 									<div class='md-content'>
 										<h3>预约详情</h3>
 										<div>
@@ -130,6 +131,7 @@ require "head.txt";
 										</div>
 									</div>
 								</div>";
+							$index++;
 						}
 					}
 				?>

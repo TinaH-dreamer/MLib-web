@@ -105,34 +105,35 @@ require "head.txt";
 						$query = "select * from ".$tablename;	//获取当前表所有数据
 					}
 					$res = mysqli_query($conn, $query) or die(mysqli_error($conn));
+					$index = 0;
 					while($row = mysqli_fetch_row($res)){
 						if($row[7] == 2)			//判断该记录是预约记录还是借阅记录，0表示预约记录，1表示借阅记录，2表示已完成记录
 						{
 							echo "<tr>";
-							echo "<td class='md-trigger' style='cursor:pointer' data-modal='modal-1'>".$row[0]."</td>";	//编号
+							echo "<td class='md-trigger' style='cursor:pointer' data-modal='modal-".$index."'>".$row[0]."</td>";	//编号
 							$sql = "select SName from student WHERE SID = ".$row[1];		//通过对应的学号，查询student表获取学生的姓名
 							$res1 = mysqli_query($conn, $sql) or die(mysqli_error($conn));
 							$row1 = mysqli_fetch_row($res1);
-							echo "<td class='md-trigger' style='cursor:pointer' data-modal='modal-1'>".$row1[0]."</td>";	//姓名
-							echo "<td class='md-trigger' style='cursor:pointer' data-modal='modal-1'>".$row[1]."</td>";	//学号
+							echo "<td class='md-trigger' style='cursor:pointer' data-modal='modal-".$index."'>".$row1[0]."</td>";	//姓名
+							echo "<td class='md-trigger' style='cursor:pointer' data-modal='modal-".$index."'>".$row[1]."</td>";	//学号
 							if(mb_strlen($row[3])>10)
 								$newStr = mb_substr($row[3],0,10,"UTF8")."...";
 							else
 								$newStr = $row[3];
-							echo "<td class='md-trigger' style='cursor:pointer' data-modal='modal-1'>".$newStr."</td>";	//书名
+							echo "<td class='md-trigger' style='cursor:pointer' data-modal='modal-".$index."'>".$newStr."</td>";	//书名
 							if(mb_strlen($row[2])>8)
 								$newStr1 = mb_substr($row[2],0,8,"UTF8")."...";
 							else
 								$newStr1 = $row[2];
-							echo "<td class='md-trigger' style='cursor:pointer' data-modal='modal-1'>".$newStr1."</td>";	//书号
+							echo "<td class='md-trigger' style='cursor:pointer' data-modal='modal-".$index."'>".$newStr1."</td>";	//书号
 							$arr1 = explode(' ',$row[4]);
-							echo "<td class='md-trigger' style='cursor:pointer' data-modal='modal-1'>".$arr1[0]."</td>";	//取书日期
+							echo "<td class='md-trigger' style='cursor:pointer' data-modal='modal-".$index."'>".$arr1[0]."</td>";	//取书日期
 							$arr2 = explode(' ',$row[5]);
-							echo "<td class='md-trigger' style='cursor:pointer' data-modal='modal-1'>".$arr2[0]."</td>";	//还书日期
+							echo "<td class='md-trigger' style='cursor:pointer' data-modal='modal-".$index."'>".$arr2[0]."</td>";	//还书日期
 							echo "<td><a href='adm_edit_borrow.php?id=".$row[$priNum]."'><button class='edit-button'>编辑</button></a> ";
 							echo "<a href='adm_finish.php?act=delete&id=".$row[$priNum]."'><button class='delete-button'>删除</button></a></td>";
 							echo "</tr>";
-							echo "<div class='md-modal md-effect-1' id='modal-1'>
+							echo "<div class='md-modal md-effect-1' id='modal-".$index."'>
 									<div class='md-content'>
 										<h3>记录详情</h3>
 										<div>
@@ -155,6 +156,7 @@ require "head.txt";
 										</div>
 									</div>
 								</div>";
+							$index++;
 						}
 					}
 				?>
