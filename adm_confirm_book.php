@@ -11,8 +11,7 @@ require "head.txt";
     <div class="menu">
         <ul>
             <li><a href="admdonate.php">捐书管理</a></li>
-            <li><a href="adm_borrow.php">预约审核</a></li>
-            <li><a href="adm_borrow.php">归还核销</a></li>
+        	<li><a href="adm_borrow.php">借阅管理</a></li>
         	<li><a href="admbooks.php">库存管理</a></li>
         	<li><a href="admusers.php">用户管理</a></li>
         </ul>

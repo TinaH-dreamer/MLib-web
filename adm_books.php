@@ -3,9 +3,33 @@
 require "head.txt";
 ?>
 <body>
-<?php
-require "header_adm.php";
-?>
+    <div class="header">
+    	<p><a><img src="img/sign.png" height="45px"></a></p>
+    </div>
+    <div class="menu">
+        <ul>
+            <li><a href="adm_donate.php">捐书管理</a></li>
+        	<li><a href="adm_borrow.php">借阅管理</a></li>
+        	<li><a href="adm_books.php">库存管理</a></li>
+        	<li><a href="adm_users.php">用户管理</a></li>
+        </ul>
+    </div>
+    <?php
+    	include ("conn.php");
+		mysqli_query($conn,"set names utf-8");
+		header("Content-type: text/html;charset=utf-8");
+		$index = 0;					//计数当前表属性数量
+		$tablename = "books";
+		$query = "desc ".$tablename;	//获取当前表的属性
+		$res = mysqli_query($conn, $query) or die(mysqli_error($conn));
+		while($row = mysqli_fetch_row($res)) {	//遍历属性，找到主码
+			if($row[3] == "PRI"){		//如果是主码，记录其属性名以及编号，便于之后操作使用
+				$pri = $row[0];
+				$priNum = $index;
+			}
+			$index++;
+		}
+     ?>
 <div class = "content">
 	<div class="box">
 		<?php 
@@ -25,10 +49,6 @@ require "header_adm.php";
 				$sql = "delete from ".$tablename." where ".$pri."='".$id."';";	//编写sql语句，pri为主码属性名
 				$res = mysqli_query($conn, $sql) or die(mysqli_error($conn));	//数据库执行删除数据操作
 			}
-			if($action == 'deleteTable') {	//删除表格操作
-				$sql = "drop table ".$tablename.";";	//编写sql语句
-				$res = mysqli_query($conn, $sql) or die(mysqli_error($conn));	//数据库执行删除表格操作
-			}
 			if($action == 'edit') {			//编辑数据操作
 				$id = $_GET['id'];			//获取要编辑数据的主码
 				$sql = "update ".$tablename." set ";
@@ -39,41 +59,53 @@ require "header_adm.php";
 				$sql = $sql ." where ".$pri."='".$id."';";
 				$res = mysqli_query($conn, $sql) or die(mysqli_error($conn)); //数据库执行编辑数据操作
 			}
+			$idorname = null;
+			if(isset($_POST['number'])){
+				$idorname = $_POST['number'];
+			}
 		?>
 		<div class = "opbar">
 		    <center>
 		        <ul>
-		            <li><input type="text" name="number" id = "con" placeholder="按书名查找"></li>
-		            <li><button name = "search" class = "button" style = "cursor:pointer">搜索</button></li>
+			        <form action="adm_books.php" method="post">
+			        <li><input type="search" name="number" id="con" placeholder="按编号/书名查找"></li>
+			        <li><button type="submit" name = "search" class = "button" style = "cursor:pointer">搜索</button></li>
+			        </form>
 		        </ul>
 		    </center>
 		</div>
 	    <table class="mt">		<!-- 绘制表格 -->
 			<thead>
 				<tr>
+					<td>编号</td>
 					<td>书名</td>
 					<td>作者</td>
 					<td>位置</td>
-					<td>库存</td>
+					<td>状态</td>
 					<td></td>
 					</tr>
 			</thead>
 			<tbody>
 				<?php
-					$query = "select * from books";	//获取当前表所有数据
+					if($idorname){
+						$query = "select * from ".$tablename." where BName like '%".$idorname."%' or BId = '".$idorname."'";
+					}
+					else{
+						$query = "select * from ".$tablename;	//获取当前表所有数据
+					}
 					$res = mysqli_query($conn, $query) or die(mysqli_error($conn));
 					while($row = mysqli_fetch_row($res)){
 						echo "<tr>";
-						$index = 0;
-						foreach ($row as $value){
-							if($index == 0)
-								$priNum = $index;
-							else
-								echo "<td>".$value."</td>";
-							$index++;
-						}
-						echo "<td><a href='edit_data.php?name=".$tablename."&id=".$row[$priNum]."#pos'><button class='edit-button'>编辑</button></a> ";
-						echo "<a href='admbooks.php?act=deleteData&name=".$tablename."&id=".$row[$priNum]."#pos'><button class='delete-button'>删除</button></a></td>";
+						echo "<td>".$row[0]."</td>";
+						echo "<td>".$row[1]."</td>";
+						echo "<td>".$row[2]."</td>";
+						echo "<td>".$row[3]."</td>";
+						if($row[4] == 0)
+							echo "<td>在库</td>";
+						else
+							echo "<td>借出</td>";
+						echo "<td><a href='edit_data.php?name=".$tablename."&id=".$row[$priNum]."'><button class='edit-button'>编辑</button></a> ";
+						echo "<a href='admbooks.php?act=deleteData&name=".$tablename."&id=".$row[$priNum]."'><button class='delete-button'>删除</button></a></td>";
 						echo "</tr>";
 					}
 				?>
