@@ -51,11 +51,8 @@ require "head.txt";
 			}
 			if($action == 'edit') {			//编辑数据操作
 				$id = $_GET['id'];			//获取要编辑数据的主码
-				$sql = "update ".$tablename." set ";
-				$res = mysqli_query($conn, $query) or die(mysqli_error($conn));
-				while($row = mysqli_fetch_row($res))
-					$sql = $sql.$row[0]."='".$_POST[$row[0]]."',";	//接收表单发送的数据写入到sql与剧中
-				$sql = rtrim($sql,",");
+				$sql = "update ".$tablename." set BID='".$_POST['bid']."', BName='".$_POST['bname']."', BAuthor='".$_POST['bauthor']."', BLoc='".$_POST['bloc']."', BState='".$_POST['bstate']."'";
+				
 				$sql = $sql ." where ".$pri."='".$id."';";
 				$res = mysqli_query($conn, $sql) or die(mysqli_error($conn)); //数据库执行编辑数据操作
 			}

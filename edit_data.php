@@ -45,25 +45,33 @@ require "head.txt";
     <table class="me">
 		<tbody>	
 			<?php
-				$query1 = "desc ".$tablename;
-				$res1 = mysqli_query($conn, $query1) or die(mysqli_error($conn));
-				$query2 = "select * from ".$tablename." where ".$pri."='".$id."';";		//获取当前主码值对应的属性值
-				$res2 = mysqli_query($conn, $query2) or die(mysqli_error($conn));
-				$dbrow2 = mysqli_fetch_array($res2);
-				$row = mysqli_num_rows($res1);
-				for($i = 0; $i < $row; $i++) {
-					$dbrow1 = mysqli_fetch_array($res1);
+				$query = "select * from ".$tablename." where ".$pri."='".$id."';";		//获取当前主码值对应的属性值
+				$res = mysqli_query($conn, $query) or die(mysqli_error($conn));
+				$dbrow = mysqli_fetch_array($res);
+				for($i = 0; $i < 5; $i++) {
 					echo "<tr>";
 					echo "<td></td>";
 					switch ($i) {
-						case '0': echo "<td>编号</td>"; break;
-						case '1': echo "<td>书名</td>"; break;
-						case '2': echo "<td>作者</td>"; break;
-						case '3': echo "<td>位置</td>"; break;
-						case '4': echo "<td>状态</td>"; break;
+						case '0': echo "<td>编号</td><td><input type='text' class='editText' name='bid' value='".$dbrow[$i]."'></td>"; break;
+						case '1': echo "<td>书名</td><td><input type='text' class='editText' name='bname' value='".$dbrow[$i]."'></td>"; break;
+						case '2': echo "<td>作者<td><input type='text' class='editText' name='bauthor' value='".$dbrow[$i]."'></td></td>"; break;
+						case '3': echo "<td>位置</td><td><input type='text' class='editText' name='bloc' value='".$dbrow[$i]."'></td>"; break;
+						case '4': {		echo "<td>状态</td>";
+										if($dbrow[$i] == 0){
+											echo "<td><select name='bstate'>
+												<option selected='selected' value='0'>在库</option>
+												<option value='1'>借出</option>
+											</select></td>";
+										}
+										else{
+											echo "<td><select name='bstate'>
+												<option value='0'>在库</option>
+												<option selected='selected' value='1'>借出</option>
+											</select></td>";
+										}
+										break;
+									}
 					}
-					//value让文本框有默认数据，即原本属性值
-					echo "<td><input type='text' class='editText' name='".$dbrow1[0]."' value='".$dbrow2[$i]."'></td>";
 					echo "<td></td>";
 					echo "</tr>";
 				}

@@ -32,3 +32,15 @@ table.me thead tr td {
 	font-size: 20px;
 	font-weight: bold;
 }
+table.me select{
+	background: #EDEDEF;
+    border: 1px solid #9CA8B8;
+    color: #7A7281;
+	cursor: text;
+	font-family: "arial";
+	font-size: 9pt;
+	height: 20px;
+	width: 150px;
+	padding: 1px;
+	outline-color: #8696A7;
+}
