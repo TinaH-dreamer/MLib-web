@@ -10,7 +10,7 @@ require "head.txt";
         <ul>
             <li><a href="admdonate.php">捐书管理</a></li>
         	<li><a href="adm_borrow.php">借阅管理</a></li>
-        	<li><a href="admbooks.php">库存管理</a></li>
+        	<li><a href="adm_books.php">库存管理</a></li>
         	<li><a href="admusers.php">用户管理</a></li>
         </ul>
     </div>
@@ -34,7 +34,7 @@ require "head.txt";
 <div class="box">
     <div class="box_p">
     	<?php 
-    		echo "<p>更新数据</p>";
+    		echo "<p>修改书目信息</p>";
     	?>
     </div>
     <?php 
@@ -81,7 +81,8 @@ require "head.txt";
 	<div class="box_p">
 		<p>
 			<?php 
-				echo "<button type='submit' class='addData-button'>更新数据</button>";
+				echo "<a href='adm_books.php'><button type='button' class='deleteTable-button'>返回</button></a> ";
+				echo "<button type='submit' class='addData-button'>更新</button>";
 			?>
 		</p>
 	</div>

@@ -37,11 +37,7 @@ require "head.txt";
 			if(isset($_GET['act']))		//接收操作，表示当前操作
 				$action = $_GET['act'];
 			if($action == 'add') {			//添加数据操作
-				$sql = "insert into ".$tablename." values(";		//插入数据的sql语句
-				$res = mysqli_query($conn, $query) or die(mysqli_error($conn));
-				while($row = mysqli_fetch_row($res))
-					$sql = $sql .'"'. $_POST[$row[0]] .'"'. ",";	//接收表单发送的数据写入到sql语句中
-				$sql = rtrim($sql,",") .")";
+				$sql = "insert into ".$tablename." values('".$_POST['bid']."','".$_POST['bname']."','".$_POST['bauthor']."','".$_POST['bloc']."','".$_POST['bstate']."')";
 				$res = mysqli_query($conn, $sql) or die(mysqli_error($conn));		//数据库执行插入数据操作
 			}
 			if($action == 'deleteData') {	//删除数据操作
@@ -102,7 +98,7 @@ require "head.txt";
 						else
 							echo "<td>借出</td>";
 						echo "<td><a href='edit_data.php?name=".$tablename."&id=".$row[$priNum]."'><button class='edit-button'>编辑</button></a> ";
-						echo "<a href='admbooks.php?act=deleteData&name=".$tablename."&id=".$row[$priNum]."'><button class='delete-button'>删除</button></a></td>";
+						echo "<a href='adm_books.php?act=deleteData&name=".$tablename."&id=".$row[$priNum]."'><button class='delete-button'>删除</button></a></td>";
 						echo "</tr>";
 					}
 				?>
@@ -112,7 +108,7 @@ require "head.txt";
 			<p>
 				<?php 
 					//表格下方添加添加数据与删除表格的按钮，点击可以跳转到添加数据界面或者删除该表后的显示表格界面，添加数据与删除表格操作都会发送表名，删除表格操作还会发送当前操作的名称。
-					echo "<a href='add_data.php?name=".$tablename."#pos'><button class='addData-button'>添加数据</button></a> ";
+					echo "<a href='add_data.php?name=".$tablename."#pos'><button class='addData-button'>添加书目</button></a> ";
 				?>
 			</p>
 		</div>
